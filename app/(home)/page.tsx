@@ -10,6 +10,7 @@ import Trophy from '@/app/components/svg/trophy'
 import Friends from '@/app/components/svg/friends'
 import Link from 'next/link'
 import FriendsTree from '@/app/components/svg/friends-tree'
+import TypingText from '@/app/components/typing-text'
 
 export default function HomePage() {
   return (
@@ -33,9 +34,10 @@ export default function HomePage() {
             }
           >
             <MagnifyingGlassIcon className={'size-8 text-neutral-400'} />
-            <p className={'text-xl font-semibold text-neutral-700'}>
-              Who are we?
-            </p>
+            <TypingText
+              text={'Who are we?'}
+              className={'text-xl font-semibold text-neutral-700'}
+            />
           </div>
           <div
             className={'mt-24 flex flex-col items-center justify-center gap-2'}
