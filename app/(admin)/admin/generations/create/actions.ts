@@ -29,7 +29,6 @@ export async function createGenerationAction(
   } catch (err) {
     // 데이터 형식이 맞지 않을 경우 오류 반환
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
       return { error: err.issues[0].message }
     }
   }
@@ -50,9 +49,9 @@ export async function createGenerationAction(
     // 캐시 업데이트
     revalidateTag('generations')
     revalidateTag('parts')
-  } catch (e) {
+  } catch {
     // DB 업데이트 오류
-    console.error(e)
+
     return { error: 'DB Update Error' }
   }
 

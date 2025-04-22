@@ -112,8 +112,7 @@ export default async function dataDeleteAction(
       default:
         return { error: 'Data type not found' }
     }
-  } catch (err) {
-    console.error(err)
+  } catch {
     return { error: 'DB Delete Error' }
   }
 

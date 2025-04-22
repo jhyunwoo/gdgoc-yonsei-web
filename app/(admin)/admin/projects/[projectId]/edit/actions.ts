@@ -58,7 +58,6 @@ export async function updateProjectAction(
   } catch (err) {
     // zod validation 에러 처리
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
       return { error: err.issues[0].message }
     }
   }
@@ -124,9 +123,9 @@ export async function updateProjectAction(
 
     // 캐시 업데이트
     revalidateTag('projects')
-  } catch (e) {
+  } catch {
     // DB 업데이트 오류 발생 시 오류 반환
-    console.error(e)
+
     return { error: 'DB Update Error' }
   }
   // 성공 시 해당 project 로 이동

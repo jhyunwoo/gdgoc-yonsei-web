@@ -15,7 +15,6 @@ export const preload = (sessionId: string) => {
  */
 export const getSession = unstable_cache(
   async (sessionId: string) => {
-    console.log(new Date(), 'Fetch Session Data', sessionId)
     const sessionData = await db.query.sessions.findFirst({
       where: eq(projects.id, sessionId),
       with: {

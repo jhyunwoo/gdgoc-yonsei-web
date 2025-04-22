@@ -14,7 +14,6 @@ export const preload = () => {
  */
 export const getParts = unstable_cache(
   async () => {
-    console.log(new Date(), 'Fetch Parts Data')
     return db.query.generations.findMany({
       with: {
         parts: {

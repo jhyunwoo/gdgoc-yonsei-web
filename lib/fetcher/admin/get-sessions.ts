@@ -15,7 +15,6 @@ export const preload = () => {
  */
 export const getSessions = unstable_cache(
   async () => {
-    console.log(new Date(), 'Fetch Sessions Data')
     return db.query.generations.findMany({
       with: {
         sessions: {

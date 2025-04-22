@@ -15,8 +15,7 @@ export default async function deleteR2Images(imageKeys: string[]) {
   try {
     await r2Client.send(deleteCommand)
     return true
-  } catch (err) {
-    console.error(err)
+  } catch {
     return false
   }
 }

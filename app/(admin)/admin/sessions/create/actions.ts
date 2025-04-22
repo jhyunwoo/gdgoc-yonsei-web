@@ -52,7 +52,6 @@ export async function createSessionAction(
   } catch (err) {
     // zod validation 에러 처리
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
       return { error: err.issues[0].message }
     }
   }
@@ -77,9 +76,8 @@ export async function createSessionAction(
 
     // 캐시 업데이트
     revalidateTag('sessions')
-  } catch (e) {
+  } catch {
     // DB 에러 처리
-    console.error(e)
     return { error: 'DB Update Error' }
   }
 

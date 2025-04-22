@@ -39,7 +39,6 @@ export async function updatePartAction(
   } catch (err) {
     // zod validation 에러 처리
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
       return { error: err.issues[0].message }
     }
   }
@@ -69,9 +68,8 @@ export async function updatePartAction(
     // 캐시 업데이트
     revalidateTag('parts')
     revalidateTag('members')
-  } catch (e) {
+  } catch {
     // DB 업데이트 오류 처리
-    console.error(e)
     return { error: 'DB Update Error' }
   }
 

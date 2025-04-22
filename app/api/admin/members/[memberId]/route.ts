@@ -34,9 +34,8 @@ export async function PUT(
     // 캐시 업데이트
     revalidateTag('members')
     return NextResponse.json({ success: true })
-  } catch (e) {
+  } catch {
     // 오류 처리
-    console.error(e)
     return NextResponse.json({ success: false })
   }
 }

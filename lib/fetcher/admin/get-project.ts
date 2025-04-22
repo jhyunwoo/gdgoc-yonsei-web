@@ -14,7 +14,6 @@ export const preload = (projectId: string) => {
  */
 export const getProject = unstable_cache(
   async (projectId: string) => {
-    console.log(new Date(), 'Fetch Project Data', projectId)
     return (
       await db.query.projects.findMany({
         where: eq(projects.id, projectId),
