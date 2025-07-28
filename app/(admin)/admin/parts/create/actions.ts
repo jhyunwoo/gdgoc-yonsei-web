@@ -17,7 +17,7 @@ import getPartFormData from '@/lib/admin/get-part-form-data'
  * @param formData - part data
  */
 export async function createPartAction(
-  prev: { error: string },
+  _prevState: { error: string },
   formData: FormData
 ) {
   const session = await auth()
@@ -36,7 +36,7 @@ export async function createPartAction(
   } catch (err) {
     // zod validation 에러 처리
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
+      console.error(err.issues)
       return { error: err.issues[0].message }
     }
   }

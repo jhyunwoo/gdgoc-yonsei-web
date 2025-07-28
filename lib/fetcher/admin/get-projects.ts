@@ -13,7 +13,7 @@ export const preload = () => {
  */
 export const getProjects = unstable_cache(
   async () => {
-    console.log(new Date(), 'Fetch Projects Data')
+    console.warn(new Date(), 'Fetch Projects Data')
     return db.query.projects.findMany({
       orderBy: desc(projects.updatedAt),
     })

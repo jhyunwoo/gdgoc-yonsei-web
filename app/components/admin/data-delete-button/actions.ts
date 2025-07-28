@@ -13,7 +13,7 @@ import { revalidateTag } from 'next/cache'
 import deleteR2Images from '@/lib/delete-r2-images'
 
 export default async function dataDeleteAction(
-  prev: { error: string },
+  _prevState: { error: string },
   formData: FormData
 ) {
   const session = await auth()

@@ -14,12 +14,12 @@ import getGenerationFormData from '@/lib/admin/get-generation-form-data'
 /**
  * Update Generation Action
  * @param generationId - generation id
- * @param prevState - previous state for form error
+ * @param _prevState - previous state for form error
  * @param formData - generation data
  */
 export async function updateGenerationAction(
   generationId: string,
-  prevState: { error: string },
+  _prevState: { error: string },
   formData: FormData
 ) {
   // 사용자 권한 확인
@@ -44,7 +44,7 @@ export async function updateGenerationAction(
   } catch (err) {
     // 데이터 형식이 맞지 않을 경우 오류 반환
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
+      console.error(err.issues)
       return { error: err.issues[0].message }
     }
   }

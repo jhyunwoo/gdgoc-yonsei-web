@@ -19,7 +19,7 @@ import getMemberFormData from '@/lib/admin/get-member-form-data'
  */
 export async function updateMemberAction(
   memberId: string,
-  prev: { error: string },
+  _prevState: { error: string },
   formData: FormData
 ) {
   // 사용자가 member 를 수정할 권한이 있는지 확인
@@ -71,7 +71,7 @@ export async function updateMemberAction(
   } catch (err) {
     // 데이터 형식이 맞지 않을 경우 오류 반환
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
+      console.error(err.issues)
       return { error: err.issues[0].message }
     }
   }
@@ -91,7 +91,9 @@ export async function updateMemberAction(
         linkedInId,
         major,
         studentId: studentId ? Number(studentId) : null,
-        telephone: telephone?.replaceAll('-', '').replaceAll(' ', ''),
+        telephone: typeof telephone === 'string'
+          ? telephone.split('-').join('').split(' ').join('')
+          : telephone,
         ...((await handlePermission(session?.user?.id, 'put', 'membersRole')) &&
         role
           ? { role: role }

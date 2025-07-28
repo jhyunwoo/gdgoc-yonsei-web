@@ -16,7 +16,7 @@ import { sessions } from '@/db/schema/sessions'
  * @param formData - session data
  */
 export async function createSessionAction(
-  prev: { error: string },
+  _prevState: { error: string },
   formData: FormData
 ) {
   const session = await auth()
@@ -56,7 +56,7 @@ export async function createSessionAction(
   } catch (err) {
     // zod validation 에러 처리
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
+      console.error(err.issues)
       return { error: err.issues[0].message }
     }
   }

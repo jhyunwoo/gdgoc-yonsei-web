@@ -88,7 +88,9 @@ export default function PerformancePage() {
 
   // 실시간 성능 측정 함수
   const handleRealTimeCollection = useCallback(async () => {
-    if (isCollectingMetrics) return
+    if (isCollectingMetrics) {
+      return
+    }
 
     setIsCollectingMetrics(true)
     try {
@@ -109,12 +111,16 @@ export default function PerformancePage() {
   }, [fetchPerformanceData])
 
   const formatMs = (ms: number | null | undefined) => {
-    if (ms === null || ms === undefined) return 'N/A'
+    if (ms === null || ms === undefined) {
+      return 'N/A'
+    }
     return `${Math.round(ms)}ms`
   }
 
   const formatScore = (score: number | null | undefined) => {
-    if (score === null || score === undefined) return 'N/A'
+    if (score === null || score === undefined) {
+      return 'N/A'
+    }
     return score.toFixed(3)
   }
 
@@ -122,7 +128,9 @@ export default function PerformancePage() {
     metric: string,
     value: number | null | undefined
   ) => {
-    if (value === null || value === undefined) return 'unknown'
+    if (value === null || value === undefined) {
+      return 'unknown'
+    }
 
     switch (metric) {
       case 'lcp':

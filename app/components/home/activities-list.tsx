@@ -68,7 +68,9 @@ export default function ActivitiesList({ lang }: { lang: string }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const scrollToCard = (direction: 'left' | 'right') => {
-    if (!scrollContainerRef.current) return
+    if (!scrollContainerRef.current) {
+      return
+    }
 
     const container = scrollContainerRef.current
     const cardWidth = 272 // w-64 (256px) + gap-8 (32px)

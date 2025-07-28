@@ -90,19 +90,27 @@ function getDeviceInfo(): DeviceInfo {
   if (userAgent.includes('Chrome')) {
     browserName = 'Chrome'
     const match = userAgent.match(/Chrome\/([0-9.]+)/)
-    if (match) browserVersion = match[1]
+    if (match) {
+      browserVersion = match[1]
+    }
   } else if (userAgent.includes('Firefox')) {
     browserName = 'Firefox'
     const match = userAgent.match(/Firefox\/([0-9.]+)/)
-    if (match) browserVersion = match[1]
+    if (match) {
+      browserVersion = match[1]
+    }
   } else if (userAgent.includes('Safari')) {
     browserName = 'Safari'
     const match = userAgent.match(/Version\/([0-9.]+)/)
-    if (match) browserVersion = match[1]
+    if (match) {
+      browserVersion = match[1]
+    }
   } else if (userAgent.includes('Edge')) {
     browserName = 'Edge'
     const match = userAgent.match(/Edge\/([0-9.]+)/)
-    if (match) browserVersion = match[1]
+    if (match) {
+      browserVersion = match[1]
+    }
   }
 
   return {
@@ -280,7 +288,9 @@ export function usePerformanceTracker(options?: {
   } = options || {}
 
   const collectAndSendMetrics = useCallback(async () => {
-    if (!enabled) return
+    if (!enabled) {
+      return
+    }
 
     const deviceInfo = getDeviceInfo()
     const networkInfo = getNetworkInfo()
@@ -327,7 +337,7 @@ export function usePerformanceTracker(options?: {
         // 기본 필수 데이터가 있는지 확인
         if (finalData.url && finalData.userAgent && finalData.deviceType) {
           if (debug) {
-            console.log('Sending performance data:', finalData)
+            console.warn('Sending performance data:', finalData)
           }
           sendPerformanceData(finalData)
         } else if (debug) {
@@ -345,7 +355,9 @@ export function usePerformanceTracker(options?: {
   }, [enabled, userId, sendImmediately, debug])
 
   useEffect(() => {
-    if (!enabled) return
+    if (!enabled) {
+      return
+    }
 
     // 페이지 로드 완료 후 메트릭 수집
     const startCollection = () => {
@@ -364,13 +376,19 @@ export function usePerformanceTracker(options?: {
       startCollection()
     } else {
       window.addEventListener('load', startCollection)
+      // 정리 함수를 항상 반환
       return () => window.removeEventListener('load', startCollection)
     }
+    
+    // document.readyState === 'complete'인 경우에도 정리 함수 반환
+    return () => {}
   }, [collectAndSendMetrics, enabled])
 
   // 페이지 unload 시에도 메트릭 전송
   useEffect(() => {
-    if (!enabled) return
+    if (!enabled) {
+      return
+    }
 
     const handleBeforeUnload = () => {
       try {

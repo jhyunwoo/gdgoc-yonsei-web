@@ -11,7 +11,7 @@ import { revalidateTag } from 'next/cache'
 import getGenerationFormData from '@/lib/admin/get-generation-form-data'
 
 export async function createGenerationAction(
-  prev: { error: string },
+  _prevState: { error: string },
   formData: FormData
 ) {
   // 사용자 generation 을 추가할 권한이 있는지 확인
@@ -29,7 +29,7 @@ export async function createGenerationAction(
   } catch (err) {
     // 데이터 형식이 맞지 않을 경우 오류 반환
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
+      console.error(err.issues)
       return { error: err.issues[0].message }
     }
   }

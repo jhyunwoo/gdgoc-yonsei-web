@@ -20,7 +20,7 @@ import getPartFormData from '@/lib/admin/get-part-form-data'
  */
 export async function updatePartAction(
   partId: string,
-  prevState: { error: string },
+  _prevState: { error: string },
   formData: FormData
 ) {
   // 사용자가 part 를 수정할 권한이 있는지 확인
@@ -39,7 +39,7 @@ export async function updatePartAction(
   } catch (err) {
     // zod validation 에러 처리
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
+      console.error(err.issues)
       return { error: err.issues[0].message }
     }
   }

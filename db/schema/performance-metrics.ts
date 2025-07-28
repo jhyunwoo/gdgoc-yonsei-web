@@ -97,14 +97,14 @@ export const performanceSummary = pgTable('performance_summary', {
 
 export const performanceMetricsRelations = relations(
   performanceMetrics,
-  ({ one }) => ({
+  () => ({
     // 필요시 users 테이블과의 관계 추가 가능
   })
 )
 
 export const performanceSummaryRelations = relations(
   performanceSummary,
-  ({ many }) => ({
+  () => ({
     // 필요시 관계 추가 가능
   })
 )

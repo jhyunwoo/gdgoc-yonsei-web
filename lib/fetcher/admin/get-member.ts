@@ -17,7 +17,7 @@ export const preload = (userId: string) => {
  */
 export const getMember = unstable_cache(
   async (userId: string) => {
-    console.log(new Date(), 'Fetch Member Data:', userId)
+    console.warn(new Date(), 'Fetch Member Data:', userId)
     return (
       await db
         .select({

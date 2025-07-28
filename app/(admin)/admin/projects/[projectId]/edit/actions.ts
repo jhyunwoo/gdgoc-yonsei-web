@@ -22,7 +22,7 @@ import { usersToProjects } from '@/db/schema/users-to-projects'
  */
 export async function updateProjectAction(
   projectId: string,
-  prevState: { error: string },
+  _prevState: { error: string },
   formData: FormData
 ) {
   const session = await auth()
@@ -64,7 +64,7 @@ export async function updateProjectAction(
   } catch (err) {
     // zod validation 에러 처리
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
+      console.error(err.issues)
       return { error: err.issues[0].message }
     }
   }

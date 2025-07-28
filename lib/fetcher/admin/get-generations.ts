@@ -13,7 +13,7 @@ export const preload = () => {
  */
 export const getGenerations = unstable_cache(
   async () => {
-    console.log(new Date(), 'Fetch Generations Data')
+    console.warn(new Date(), 'Fetch Generations Data')
     return db.select().from(generations).orderBy(desc(generations.id))
   },
   [],

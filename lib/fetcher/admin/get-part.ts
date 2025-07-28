@@ -14,7 +14,7 @@ export const preload = (partId: number) => {
  */
 export const getPart = unstable_cache(
   async (partId: number) => {
-    console.log(new Date(), 'Fetch Part Data', partId)
+    console.warn(new Date(), 'Fetch Part Data', partId)
     return db.query.parts.findFirst({
       where: eq(parts.id, partId),
       with: {

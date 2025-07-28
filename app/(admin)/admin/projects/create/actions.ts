@@ -16,7 +16,7 @@ import { usersToProjects } from '@/db/schema/users-to-projects'
  * @param formData - project data
  */
 export async function createProjectAction(
-  prev: { error: string },
+  _prevState: { error: string },
   formData: FormData
 ) {
   const session = await auth()
@@ -60,7 +60,7 @@ export async function createProjectAction(
   } catch (err) {
     // zod validation 에러 처리
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
+      console.error(err.issues)
       return { error: err.issues[0].message }
     }
   }

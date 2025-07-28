@@ -21,7 +21,7 @@ import getSessionFormData from '@/lib/admin/get-session-form-data'
  */
 export async function updateSessionAction(
   sessionId: string,
-  prevState: { error: string },
+  _prevState: { error: string },
   formData: FormData
 ) {
   const session = await auth()
@@ -59,7 +59,7 @@ export async function updateSessionAction(
   } catch (err) {
     // zod validation 에러 처리
     if (err instanceof z.ZodError) {
-      console.log(err.issues)
+      console.error(err.issues)
       return { error: err.issues[0].message }
     }
   }

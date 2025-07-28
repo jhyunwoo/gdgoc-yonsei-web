@@ -14,7 +14,7 @@ export const preload = (generationId: number) => {
  */
 export const getGeneration = unstable_cache(
   async (generationId: number) => {
-    console.log(new Date(), 'Fetch Generation Data', generationId)
+    console.warn(new Date(), 'Fetch Generation Data', generationId)
     return db.query.generations.findFirst({
       where: eq(generations.id, generationId),
       with: {
