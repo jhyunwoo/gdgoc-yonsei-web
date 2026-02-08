@@ -1,18 +1,14 @@
 import 'server-only'
-import db from '@/db'
-import cacheTag from '@/lib/server/cacheTag'
 import { lte } from 'drizzle-orm'
 import { sessions } from '@/db/schema/sessions'
+import { baseFetcher } from './base-fetcher'
 
 export const preload = () => {
   void getSessions()
 }
 
 export async function getSessions() {
-  'use cache'
-  cacheTag('sessions')
-
-  return db.query.sessions.findMany({
+  return baseFetcher('sessions', ['sessions'], {
     with: {
       part: {
         with: {
