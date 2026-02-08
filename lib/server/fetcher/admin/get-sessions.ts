@@ -1,20 +1,16 @@
 import { sessions } from '@/db/schema/sessions'
 import 'server-only'
-import db from '@/db'
 import { desc } from 'drizzle-orm'
 import { generations } from '@/db/schema/generations'
-import { cacheTag } from 'next/dist/server/use-cache/cache-tag'
+import { baseFetcher } from '../base-fetcher'
 
 export const preload = () => {
   void getSessions()
 }
 
 export async function getSessions() {
-  'use cache'
   console.log(new Date(), 'Fetch Sessions Data')
-  cacheTag('generations', 'sessions')
-
-  return db.query.generations.findMany({
+  return baseFetcher('generations', ['generations', 'sessions'], {
     with: {
       parts: {
         with: {

@@ -1,15 +1,11 @@
-import db from '@/db'
-import cacheTag from '@/lib/server/cacheTag'
+import { baseFetcher } from '../base-fetcher'
 
 export const preload = () => {
   void getMembersWithGeneration()
 }
 
 export async function getMembersWithGeneration() {
-  'use cache'
-  cacheTag('members', 'generations')
-
-  return db.query.generations.findMany({
+  return baseFetcher('generations', ['members', 'generations'], {
     with: {
       parts: {
         with: {

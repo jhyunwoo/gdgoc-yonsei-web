@@ -1,18 +1,14 @@
 import 'server-only'
-import db from '@/db'
 import { and, eq, lte } from 'drizzle-orm'
 import { sessions } from '@/db/schema/sessions'
-import cacheTag from '@/lib/server/cacheTag'
+import { baseFirstFetcher } from './base-fetcher'
 
 export const preload = (sessionId: string) => {
   void getSession(sessionId)
 }
 
 export async function getSession(sessionId: string) {
-  'use cache'
-  cacheTag('sessions')
-
-  return db.query.sessions.findFirst({
+  return baseFirstFetcher('sessions', ['sessions'], {
     where: and(
       eq(sessions.id, sessionId),
       lte(sessions.endAt, new Date()),

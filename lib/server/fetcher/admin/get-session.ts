@@ -1,9 +1,8 @@
 import 'server-only'
-import db from '@/db'
 import { eq } from 'drizzle-orm'
 import { sessions } from '@/db/schema/sessions'
 import { users } from '@/db/schema/users'
-import cacheTag from '@/lib/server/cacheTag'
+import { baseFirstFetcher } from '../base-fetcher'
 
 /**
  * Preloads the data for a specific session into the cache.
@@ -15,13 +14,10 @@ export const preload = (sessionId: string) => {
 }
 
 export async function getSession(sessionId: string) {
-  'use cache'
-  cacheTag('sessions')
-
   console.log(new Date(), 'Fetch Session Data', sessionId)
 
   // Fetch the main session data, including the generation it belongs to.
-  const sessionData = await db.query.sessions.findFirst({
+  const sessionData = await baseFirstFetcher('sessions', ['sessions'], {
     where: eq(sessions.id, sessionId),
     with: {
       part: true,
@@ -40,7 +36,7 @@ export async function getSession(sessionId: string) {
 
   // If the session has an author, fetch the author's data.
   const authorData = sessionData.authorId
-    ? await db.query.users.findFirst({
+    ? await baseFirstFetcher('users', ['sessions'], {
         where: eq(users.id, sessionData.authorId),
       })
     : null

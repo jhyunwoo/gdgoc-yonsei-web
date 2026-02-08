@@ -16,5 +16,18 @@ export async function baseFetcher<T extends keyof typeof db.query>(
   'use cache'
   cacheTag(...tags)
   // @ts-ignore
-  return db.query[tableName].findMany(options)
+  const result = await db.query[tableName].findMany(options)
+  return result
+}
+
+export async function baseFirstFetcher<T extends keyof typeof db.query>(
+  tableName: T,
+  tags: string[],
+  options: any = {}
+) {
+  'use cache'
+  cacheTag(...tags)
+  // @ts-ignore
+  const result = await db.query[tableName].findFirst(options)
+  return result
 }

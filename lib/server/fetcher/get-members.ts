@@ -1,18 +1,15 @@
 import 'server-only'
-import db from '@/db'
 import { asc, desc } from 'drizzle-orm'
 import { usersToParts } from '@/db/schema/users-to-parts'
 import { parts } from '@/db/schema/parts'
-import cacheTag from '@/lib/server/cacheTag'
+import { baseFetcher } from './base-fetcher'
 
 export const preloadMembers = () => {
   void getMembers()
 }
 
 export async function getMembers() {
-  'use cache'
-  cacheTag('members', 'parts', 'generations')
-  return db.query.users.findMany({
+  return baseFetcher('users', ['members', 'parts', 'generations'], {
     with: {
       usersToParts: {
         with: {
