@@ -5,6 +5,16 @@ It is built with Next.js 15 (App Router), powered by Drizzle ORM with PostgreSQL
 
 GDGoC Yonsei Official Website: https://gdgoc.yonsei.ac.kr
 
+## Project context and engineering approach
+
+This is the official web platform for Google Developer Groups on Campus Yonsei. It supports a public-facing community presence alongside authenticated operations such as member workflows, publishing, email delivery, and asset uploads.
+
+The implementation treats these concerns as separate boundaries: Next.js and React render the application; PostgreSQL and Drizzle model persistent data; NextAuth and WebAuthn protect identity flows; S3 presigned URLs move uploads out of the application process; and Zod validates external input. This design addresses the reliability and security needs of a student organization site while keeping content management practical for operators.
+
+## Status
+
+Current official-site implementation. Local setup requires environment variables described below; credentials belong in local or platform-managed secret storage only.
+
 ⸻
 
 🚀 Tech Stack
